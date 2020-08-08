@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax</title>
+	</head>
+	<body>
+		<div id="result"></div>
+		<form action="#" id="idform">
+			<input type="number" id="button" class="btn" value="1" name="get1">
+			<input type="number" id="button2" class="btn" value="2" name="get2">
+			<input type="number" id="button3" class="btn" value="3" name="get3">
+			<input type="submit" id="button4" class="btn" value="4">
+		</form>
+	</body>
+
+
+<!-- Пусть сервер ожидает три GET параметра с числами, а возвращает сумму этих чисел. На клиенте сделайте HTML форму для ввода этих чисел. Сделайте так, чтобы данные формы отправлялись через AJAX. После получения ответа сервера запишите этот ответ в какой-нибудь абзац.-->
+
+	<script>
+
+
+		let result = document.getElementById('result');
+		let btn = document.querySelector("#button4");
+		let btns = document.querySelector("input[type='number']");
+
+		btn.addEventListener("click",function (){
+			let arr = new Array();
+			let sum = Number(btns.value);
+			let promise = fetch(`/ajax.php?num=${sum}`)
+			promise.then(
+				response => {
+					return response.text();
+				}
+				).then(
+					text => {
+						result.innerHTML = text;
+					}
+				);
+			});
+
+	</script>
+</html>

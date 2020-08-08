@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax</title>
+	</head>
+	<body>
+		<div id="result"></div>
+		<input type="submit" id="button" value="1">
+	</body>
+
+
+<!-- Дана кнопка, абзац и страница /ajax/, которая возвращает текущее время. Сделайте так, чтобы по нажатию на кнопку в абзац загружалось с сервера содержимое страницы по адресу /ajax/. -->
+
+	<script>
+
+
+		let result = document.getElementById('result');
+		let btns = document.querySelectorAll("input");
+		console.log(true);
+
+		btns.forEach((item)=>{
+			item.addEventListener("click",()=>{
+				console.log(true);
+				let promise = fetch(`${item.value}.html`);
+					promise.then(
+						response => {
+							return response.text();
+						}
+					).then(
+						text => {
+							result.innerHTML = text;
+				}
+			);
+			})
+		})
+
+
+
+	</script>
+</html>
