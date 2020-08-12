@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax</title>
+	</head>
+	<body>
+		<div id="result"></div>
+		<form action="" id="idform" method="GET">
+			<input type="number" id="button" class="btn" value="1" name="get1">
+			<input type="number" id="button2" class="btn" value="2" name="get2">
+			<input type="number" id="button3" class="btn" value="3" name="get3">
+			<input type="submit" id="button4" class="btn" value="4">
+		</form>
+
+
+<!-- На клиенте сделайте HTML форму для ввода 10 чисел. Отправьте эту форму аяксом на сервер методом POST. Пусть сервер возвращает сумму переданных чисел (совет: используйте на сервере функцию array_sum). На клиенте после получения ответа сервера выведите этот ответ в каком-нибудь абзаце.-->
+
+	<script>
+
+
+		let result = document.getElementById('result');
+		let btn = document.querySelector("#button4");
+		let btns = document.querySelectorAll("input[type='number']");
+		let form = document.getElementById("idform");
+
+		form.addEventListener("submit",function(event){
+			// btns.forEach((item)=>{
+			// 	searchParams.set('${item.name}',Number(item.value));
+			// })
+			let promise = fetch(`/ajax.php`,{
+				method: 'POST',
+				body: new FormData(this),
+			});
+			promise.then((response)=>{
+				return response.text();
+			}).then((text)=>{
+				result.innerHTML = text;
+			})
+			event.preventDefault();
+		});
+	</script>
+	</body>
+
+</html>

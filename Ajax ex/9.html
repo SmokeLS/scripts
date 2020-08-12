@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax</title>
+	</head>
+	<body>
+		<div id="result"></div>
+		<form method="POST" id="form">
+			<input type="text" id="id1" class="btns" name="btn1">
+			<input type="text" id="id2" class="btns" name="btn2">
+			<input type="text" id="id3" class="btns" name="btn3">
+			<input type="text" id="id4" class="btns" name="btn4">
+			<input type="submit" id="sub" value="button">
+		</form>
+<!--Пусть на клиенте есть кнопка. По нажатию на эту кнопку отправьте GET запрос с каким-нибудь числом, соответствующим id какого-либо работника в базе данных. Пусть серверный скрипт удалит работника с полученным id.-->
+
+	<script>
+		let result = document.getElementById("result")
+		let btns = document.querySelectorAll(".btns");
+		let form = document.getElementById("form");
+		let sub = document.getElementById("sub");
+
+		form.addEventListener("submit",function(event){
+			let promise = fetch("/2.php",{
+				method: "POST",
+				body: new FormData(this),
+			});
+			promise.then(response =>{
+				return response.text();
+			}).then(text =>{
+				result.innerHTML = text;
+			})
+			event.preventDefault();
+		});
+
+		document.addEventListener("DOMContentLoaded",display);
+
+		function display(){
+			let promise = fetch("/ajax.php");
+			promise.then(response =>{
+				return response.text();
+			}).then(text =>{
+				result.innerHTML = text;
+			})
+			event.preventDefault();
+		}
+	</script>
+	</body>
+
+</html>

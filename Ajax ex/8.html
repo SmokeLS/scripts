@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax</title>
+	</head>
+	<body>
+		<input type="text" id="inp" name="del">
+		<div id="result"></div>
+		<div id="result2"></div>
+		<button id="btn">button</button>
+<!--Пусть на клиенте есть кнопка. По нажатию на эту кнопку отправьте GET запрос с каким-нибудь числом, соответствующим id какого-либо работника в базе данных. Пусть серверный скрипт удалит работника с полученным id.-->
+
+	<script>
+		let btn = document.querySelector("button");
+		let inp = document.querySelector("input");
+
+		btn.addEventListener("click",function(){
+			let promise = fetch(`/ajax.php?del=${inp.value}`);
+
+
+			promise.then((response)=>{
+				return response.text();
+			}).then(text =>{
+				result.innerHTML = text;
+			})
+		})
+	</script>
+	</body>
+
+</html>
