@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax</title>
+	</head>
+	<body>
+
+	<button id="btn">button</button>
+	<div id="result"></div>
+	<script>
+	let btn = document.getElementById("btn");
+	let result = document.getElementById("result");
+	btn.addEventListener("click",display());
+
+	function display(){
+		let i = 0; 
+		return async function (){
+			let promise = await fetch(`/ajax.php?get=${i}`);
+			i+=3;
+			let txt = await promise.text();
+			result.innerHTML += txt;
+		}
+	}
+	</script>
+	</body>
+
+</html>
